@@ -1,0 +1,16 @@
+
+
+.mm-search-area{
+    .input-group-text{
+        background-color: white;
+        border-bottom: 3px solid black;
+        border-top:none;
+        border-left: none;
+        border-right: none;
+        border-radius: 0 !important;
+    }
+
+    input{
+        @extend .input-group-text;
+    }
+}

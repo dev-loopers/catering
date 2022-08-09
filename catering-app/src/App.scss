@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Amita:wght@700&display=swap');
+$heading-font: 'Comfortaa', cursive;
+// $card-font :'Amita', cursive;
+
+@mixin contactCol($bg) {
+    text-align: center;
+    background-color: $bg;
+    padding: 5rem 3rem ;
+    top: 50%;
+    cursor: pointer;
+    font-family: $heading-font;
+
+}
+.sec-title{
+    font-family: $heading-font;
+}
+.customnavs{
+    background: red!important;
+    font-weight: bold!important;
+    color: white!important;
+    padding: 25px !important;
+}
+
+.thali{
+    border-radius: 5px;
+    box-shadow: 0px 7px 8px 0px #a1a1a1;
+    display: grid;
+    grid-template-columns: 40% auto;
+
+    img{
+        width:100%;
+        height: 100%;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        filter: drop-shadow(5px 3px 4px pink);
+        transition: width 1s, height 1s;
+    }
+    img:hover{
+        width: 105%;
+        height: 103%;
+    }
+
+    .thali-description{
+        padding: 10px;
+      
+        h1{
+            font-size: 1.5rem;
+            font-family: $heading-font;
+        }
+
+        .thali-price{
+            p{
+            display: flex;
+            align-items: center;
+            font-family: $heading-font;
+            
+            }
+        }
+
+        .thali-feauture{
+            display: flex;
+            justify-content:flex-end;
+            gap:5px ;
+            align-items: center;
+            h4{
+                padding: 5px 10px;
+                border-radius: 5px;
+                border:none;
+                background-color: black;
+                color: white;
+            }
+            small{
+                border-radius: 5px;
+                padding: 2px 5px;
+                color:white;
+                background-color: black;
+            }
+       
+    
+            
+        }
+    }
+
+}
+
+
+.contact-us{
+    .contact-column-left{
+       @include contactCol(rgb(248 255 4));
+    }
+    .contact-column-right{
+        @include contactCol(#fb0);
+     }
+     a{
+        text-decoration: none;
+        font-size: 3vw;;
+        font-weight: 900;
+        color: #962d2d;
+     }
+     h1{
+        color: #929292;
+        font-weight: 900;
+     }
+}
+
+.footer{
+    ul{
+        li{
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+            a{
+                text-decoration: none;
+                color: grey;
+            }
+        }
+    }
+    
+}
