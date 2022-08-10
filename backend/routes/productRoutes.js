@@ -1,13 +1,10 @@
 const express = require('express');
-const { model } = require('mongoose');
-
+const {getDishes,getDish} = require('../controller/productController');
 const router = express.Router()
 
 
-router.get('/products',(req,resp)=>{
-
-    resp.send('products list');
-});
+router.route('/products').get(getDishes);
+router.route('/products/:id').get(getDish);
 
 
 module.exports = router;
