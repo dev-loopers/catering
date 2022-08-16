@@ -1,3 +1,2 @@
 custom error handling (using middleware=)
-use express async handler
-use mvc pattern
+config cors

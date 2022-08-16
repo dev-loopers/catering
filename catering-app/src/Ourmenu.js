@@ -4,7 +4,7 @@ import ThaliSample from './component/ThaliSample';
 import axios from 'axios';
 import react, { useEffect,useState } from "react";
 function Ourmenu(){
-    const {dish,setDish} = useState([]);
+    const [dish,setDish] = useState([]);
     useEffect(()=>{
         const fetchProducts = async ()=>{
            const {data}  = await axios.get('/api/products')
@@ -14,16 +14,16 @@ function Ourmenu(){
         fetchProducts()
     },[]);
 
-    console.log("dish ::: "+ dish);
-
     return(
         <Container fluid>
             <HeaderSec title="Choose from our menu"/>
             <Row>
              
-            {Array.from({ length: 10 }).map((_, idx) => (
-                <Col xs={12} md ={6} lg={4} className="mt-5"><ThaliSample cat={idx % 2 ===0?"veg":"non veg"} /></Col>
-            ))}
+            {dish.map(product => 
+                <Col xs={12} md ={6} lg={4} className="mt-5">
+                    <ThaliSample dishtype={product.categories} name={product.name} price={product.price} image={product.image} cat={product.is_veg} />
+                </Col>
+            )}
                 
          
             </Row>

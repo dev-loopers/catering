@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 
 const dishSchema = mongoose.Schema({
-    User:{
+    user:{
         type:mongoose.Schema.Types.ObjectId,
         required:true,
         ref:'UserModel'

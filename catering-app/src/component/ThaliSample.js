@@ -4,23 +4,22 @@ import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import Table from 'react-bootstrap/Table';
-import cardimg from '../images/cardimg.png';
 
 function ThaliSample(props) {
     return (
         <div className="thali">
-            <img src={cardimg} alt="" />
+            <img src={props.image} alt="" />
             <div className="thali-description">
-                <h1 className="thali-title">North Veg Thali</h1>
+                <h1 className="thali-title">{props.name}</h1>
                 <div className="thali-price">
                     <small>Starting From</small>
                     <p>
-                        <h1>&#x20B9;250 INR &nbsp;</h1><small>Per plate.</small>
+                        <h1>&#x20B9;{props.price} INR &nbsp;</h1><small>Per plate.</small>
                     </p>
                 </div>
                 <div className="thali-feauture">
        
-                    <small style={{backgroundColor: props.cat==="veg"?"green":"red"}}>{props.cat}</small>
+                    <small style={{backgroundColor: props.cat?"green":"red"}}>{props.cat?"Veg":"Non-veg"}</small>
                     <OverlayTrigger
                         placement="auto"
                         overlay={<Popover id="popover-basic">
