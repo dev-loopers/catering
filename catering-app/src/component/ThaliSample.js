@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 import Table from 'react-bootstrap/Table';
-
+    
 function ThaliSample(props) {
     return (
         <div className="thali">

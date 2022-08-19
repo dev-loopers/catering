@@ -21,9 +21,10 @@ db_conn();
 
 //middlewares 
 app.use(cors());
+app.use(express.json());
 //routes config 
 app.use('/api',dishRoutes);
-app.use('/auth',authRoutes);
+app.use('/api/auth',authRoutes);
 
 app.get('/',(res,req)=>{
     req.send("hello");

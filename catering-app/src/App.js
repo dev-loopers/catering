@@ -8,9 +8,25 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import { BrowserRouter , Routes ,Route} from "react-router-dom";
 import CateresApp from './CateresApp';
 import DecoreApp from './DecoreApp';
+import { useState, useEffect } from "react";
+import axios from 'axios';
+import dishListContext from './dishContext';
 function App() {
 
+  let [dish, setDish] = useState([]);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const { data } = await axios.get("/api/products");
+      setDish(data);
+    };
+  
+    fetchProducts();
+  }, []);
+
+
+
   return (
+    <dishListContext.Provider value={{dish}}>
     <BrowserRouter>
     <DragDropContext>
     <div>
@@ -28,6 +44,7 @@ function App() {
     </div>
     </DragDropContext>
     </BrowserRouter>
+    </dishListContext.Provider>
   );
 }
 
