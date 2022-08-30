@@ -14,3 +14,19 @@
         @extend .input-group-text;
     }
 }
+
+.droppable{
+    min-width: 110px;
+    padding: 20px 10px;
+
+    border-radius: 5px;
+    list-style-type: none;
+    min-height: 580px;
+
+  }
+  
+  .dropped{
+    border: 2px dashed green;
+    background-color: #3500fd47;
+
+  }

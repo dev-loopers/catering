@@ -4,7 +4,6 @@ import Menubar from "./component/Menubar";
 
 import ContactUs from './component/ContactUs';
 import Footer from './component/Footer';
-import { DragDropContext } from 'react-beautiful-dnd';
 import { BrowserRouter , Routes ,Route} from "react-router-dom";
 import CateresApp from './CateresApp';
 import DecoreApp from './DecoreApp';
@@ -28,7 +27,7 @@ function App() {
   return (
     <dishListContext.Provider value={{dish}}>
     <BrowserRouter>
-    <DragDropContext>
+ 
     <div>
       <Menubar />
       <Routes>
@@ -42,7 +41,6 @@ function App() {
       <ContactUs/><Footer/>
      
     </div>
-    </DragDropContext>
     </BrowserRouter>
     </dishListContext.Provider>
   );
