@@ -3,6 +3,7 @@ const app = express();
 const dotenv = require('dotenv');
 const db_conn = require('./config/database');
 const path = require('path');
+const {errorHandler} = require('./middleware/errorMiddleware');
 var cors = require('cors')
 
 // routes 
@@ -20,6 +21,7 @@ dotenv.config({path: path.resolve(__dirname+'/.env')});
 db_conn();
 
 //middlewares 
+app.use(errorHandler);
 app.use(cors());
 app.use(express.json());
 //routes config 

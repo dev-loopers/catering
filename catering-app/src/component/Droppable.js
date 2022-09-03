@@ -14,7 +14,7 @@ const Droppable = ({ id, items }) => {
     <SortableContext id={id} items={items} strategy={rectSortingStrategy}>
       <ul className="droppable" ref={setNodeRef}>
         {items.map((item) => (
-          <SortableItem key={item} id={item} />
+          <SortableItem key={JSON.parse(item)._id} id={item} />
         ))}
       </ul>
     </SortableContext>

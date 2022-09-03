@@ -4,9 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import '../css/MenuMaker.scss';
 import HeaderSec from '../includes_comp/HeaderSec';
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 import { arrayMove, insertAtIndex, removeAtIndex } from "../utils/DropDownArrays";
+import axios from 'axios';
+import {Button as UIButton } from '@mui/material';
+import GetLocation from "../utils/GetLocation";
 
 import {
   DndContext,
@@ -25,21 +28,24 @@ function MenuMaker() {
   let foodList = [];
 
   const cartItem = [
-    { id: 1, itemTitle: "item-1", cat: "Sweet" },
-    { id: 2, itemTitle: "item-2", cat: "Sweet" },
-    { id: 3, itemTitle: "item-3", cat: "Non veg" },
-    { id: 4, itemTitle: "item-4", cat: "Sweet" },
-    { id: 5, itemTitle: "item-5", cat: "Desert" },
-    { id: 6, itemTitle: "item-6", cat: "Desert" },
+    { _id: 1, name: "item-1", categories: "Sweet", belongs: "indian", is_veg: true },
+    { _id: 2, name: "item-2", categories: "Sweet", belongs: "indian", is_veg: true },
+    { _id: 3, name: "item-3", categories: "Non veg", belongs: "italian", is_veg: false },
+    { _id: 4, name: "item-4", categories: "Sweet", belongs: "indian", is_veg: true },
+    { _id: 5, name: "item-5", categories: "Desert", belongs: "italian", is_veg: false },
+    { _id: 6, name: "item-6", categories: "Desert", belongs: "chines", is_veg: false },
   ]
-  cartItem.map((i) => {
-    foodList.push(JSON.stringify(i))
-  })
+  function setIntialValue(a) {
+    foodList = [];
+    a.map((i) => {
+      foodList.push(JSON.stringify(i))
+    })
 
-
-
+    foodList.sort();
+    return foodList.reverse();
+  }
   const [itemGroups, setItemGroups] = useState({
-    group1: foodList,
+    group1: setIntialValue(cartItem),
     group2: [],
 
   });
@@ -151,8 +157,38 @@ function MenuMaker() {
   };
 
 
-  return (
+  const searchHandler = async (e) => {
+    let value = e.target.value;
+    const options = { itemname: value }
+    const { data } = await axios.post('/api/getItems', options);
+    console.log(data.data)
+    setItemGroups({
+      group1: setIntialValue(data.data),
+      group2: [...itemGroups.group2]
 
+    }
+    );
+
+
+  }
+
+  const [isCartEmpty, setIsCartEmpty] = useState(true);
+
+  useEffect(()=>{
+    const getQuots = ()=>{
+      let draggedcart = itemGroups.group2;
+      if (draggedcart.length > 0){
+        setIsCartEmpty(false);
+      }else{
+        setIsCartEmpty(true);
+      }
+
+    }
+    getQuots()
+  },[itemGroups.group2])
+
+  return (
+    
     <Container>
       <div className="text-center p-3">
         <HeaderSec title="Create a dish" />
@@ -180,7 +216,7 @@ function MenuMaker() {
                   <Row>
                     <Col className="p-3">
                       <h5>Create your awesome menu</h5>
-                    
+                      <small style={{ color: "green", fontWeight: "bold", fontFamily: 'Comfortaa' }}> Drag &amp; Drop to create your menu </small>
                     </Col>
                   </Row>
 
@@ -195,7 +231,7 @@ function MenuMaker() {
                       <Col xs={12} sm={12} md={4} lg={4} xxl={4} className="caters-items-list">
                         <InputGroup className="mb-2 mm-search-area">
                           <InputGroup.Text><FontAwesomeIcon icon={faMagnifyingGlass} /></InputGroup.Text>
-                          <Form.Control id="inlineFormInputGroup" placeholder="Search Food" />
+                          <Form.Control id="searchMenuMakerFood" placeholder="Search Food" onKeyUp={searchHandler} />
                         </InputGroup>
 
 
@@ -215,7 +251,9 @@ function MenuMaker() {
                       </Col>
                       <Col xs={12} sm={12} md={8} lg={8} xxl={8} >
                         <div className="drop">
-                        <div className="mb-4 "> Drag &amp; Drop here to add in you menu</div>
+                          <div className="mb-4 ">  
+                          { isCartEmpty ? null :<UIButton variant="contained" >Get Quotation</UIButton>}
+                          </div>
                           <Droppable
                             id={'group2'}
                             items={itemGroups['group2']}

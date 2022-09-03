@@ -9,6 +9,6 @@ router.get('/users',(req,resp)=>{
 
 router.route('/register').post(registerUser);
 router.route('/login').post(authController);
-router.get('/profile',protectRoute,getProfile);
+router.route('/profile').get(protectRoute,getProfile);
 
 module.exports = router;

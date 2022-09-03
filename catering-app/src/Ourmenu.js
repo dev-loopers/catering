@@ -12,8 +12,9 @@ function Ourmenu() {
       <HeaderSec title="Choose from our menu" />
       <Row>
         {dishList.map((product) => (
-          <Col xs={12} md={6} lg={4} className="mt-5">
+          <Col xs={12} md={6} lg={4} className="mt-5" key={product._id}>
             <ThaliSample
+          
               dishtype={product.categories}
               name={product.name}
               price={product.price}

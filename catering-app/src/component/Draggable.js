@@ -4,10 +4,15 @@ import { CSS } from "@dnd-kit/utilities";
 import {  Card } from "react-bootstrap";
 
 export function Item(props) {
-  return <Card className="mb-2">
-    <Card.Body >{JSON.parse(props.element).itemTitle}<br />
-      <small className="text-muted text-end">{JSON.parse(props.element).cat}</small>
+  return <Card className={JSON.parse(props.element).is_veg?"mb-2 greenborder shadow":"mb-2 redborder shadow"} >
+    <Card.Body >{JSON.parse(props.element).name}<br />
+      <small className="text-muted text-end">{JSON.parse(props.element).categories}</small>
+      <div className="text-muted d-flex justify-content-between align-items-center">
+        <small>{JSON.parse(props.element).belongs}</small>
+        <small className="dot" style={{backgroundColor:JSON.parse(props.element).is_veg?"green":"red"}}></small>
+      </div>
     </Card.Body>
+    
   </Card>
 }
 

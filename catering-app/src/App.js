@@ -13,6 +13,7 @@ import dishListContext from './dishContext';
 function App() {
 
   let [dish, setDish] = useState([]);
+  let [isGeolocationAvailable, setDish] = useState([]);
   useEffect(() => {
     const fetchProducts = async () => {
       const { data } = await axios.get("/api/products");
@@ -20,7 +21,7 @@ function App() {
     };
   
     fetchProducts();
-  }, []);
+  }, [dish]);
 
 
 
