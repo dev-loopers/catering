@@ -8,9 +8,7 @@ import React, { useEffect, useState } from "react";
 import { sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 import { arrayMove, insertAtIndex, removeAtIndex } from "../utils/DropDownArrays";
 import axios from 'axios';
-import {Button as UIButton } from '@mui/material';
-import GetLocation from "../utils/GetLocation";
-
+import BsModal from "../utils/BsModal";
 import {
   DndContext,
 
@@ -24,6 +22,23 @@ import {
 
 import Droppable from "./Droppable";
 function MenuMaker() {
+
+  // model handler for
+    // form handler 
+    const handleSubmit = (event) => {
+      event.preventDefault();
+  
+      const nameInput = event.target.name.value;
+      const contactInput = event.target.contact.value;
+      const cityInput = event.target.city.value;
+      const emailInput = event.target.email.value;
+  
+      console.log(nameInput); 
+      console.log(contactInput);
+      console.log(cityInput);
+      console.log(emailInput); 
+  };
+
 
   let foodList = [];
 
@@ -252,7 +267,7 @@ function MenuMaker() {
                       <Col xs={12} sm={12} md={8} lg={8} xxl={8} >
                         <div className="drop">
                           <div className="mb-4 ">  
-                          { isCartEmpty ? null :<UIButton variant="contained" >Get Quotation</UIButton>}
+                          { isCartEmpty ? null :<BsModal handler/>}
                           </div>
                           <Droppable
                             id={'group2'}
@@ -260,7 +275,6 @@ function MenuMaker() {
                             activeId={activeId}
                             key={'group2'}
                           />
-
                         </div>
 
                       </Col>
@@ -321,6 +335,7 @@ function MenuMaker() {
 
         </Container>
       </div>
+
 
     </Container>
 

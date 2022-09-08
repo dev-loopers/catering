@@ -10,10 +10,10 @@ import DecoreApp from './DecoreApp';
 import { useState, useEffect } from "react";
 import axios from 'axios';
 import dishListContext from './dishContext';
+
 function App() {
 
   let [dish, setDish] = useState([]);
-  let [isGeolocationAvailable, setDish] = useState([]);
   useEffect(() => {
     const fetchProducts = async () => {
       const { data } = await axios.get("/api/products");
