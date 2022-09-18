@@ -10,7 +10,9 @@ import DecoreApp from './DecoreApp';
 import { useState, useEffect } from "react";
 import axios from 'axios';
 import dishListContext from './dishContext';
-
+import LoginComp from './component/LoginComp';
+import RegisterComp from './component/RegisterComp';
+import AccountHome from './component/Accounts/AccountHome';
 function App() {
 
   let [dish, setDish] = useState([]);
@@ -28,6 +30,7 @@ function App() {
   return (
     <dishListContext.Provider value={{dish}}>
     <BrowserRouter>
+
  
     <div>
       <Menubar />
@@ -37,6 +40,10 @@ function App() {
         <Route path="/" element={<CateresApp/>} />
         <Route path="/caterers" element={<CateresApp/>}/>
         <Route path="/decor" element={<DecoreApp/>} />
+        <Route path="/login" element={<LoginComp/>} />
+        <Route path="/register" element={<RegisterComp/>} />
+        <Route path="/account" element={<AccountHome/>} />
+
 
       </Routes>
       <ContactUs/><Footer/>

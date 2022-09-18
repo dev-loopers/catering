@@ -9,6 +9,7 @@ import { sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 import { arrayMove, insertAtIndex, removeAtIndex } from "../utils/DropDownArrays";
 import axios from 'axios';
 import BsModal from "../utils/BsModal";
+import dishListContext from "../dishContext";
 import {
   DndContext,
 
@@ -24,21 +25,7 @@ import Droppable from "./Droppable";
 function MenuMaker() {
 
   // model handler for
-    // form handler 
-    const handleSubmit = (event) => {
-      event.preventDefault();
-  
-      const nameInput = event.target.name.value;
-      const contactInput = event.target.contact.value;
-      const cityInput = event.target.city.value;
-      const emailInput = event.target.email.value;
-  
-      console.log(nameInput); 
-      console.log(contactInput);
-      console.log(cityInput);
-      console.log(emailInput); 
-  };
-
+    
 
   let foodList = [];
 
@@ -267,7 +254,11 @@ function MenuMaker() {
                       <Col xs={12} sm={12} md={8} lg={8} xxl={8} >
                         <div className="drop">
                           <div className="mb-4 ">  
-                          { isCartEmpty ? null :<BsModal handler/>}
+                          { isCartEmpty ? null :
+                          <dishListContext.Provider value={{'droppedItem':itemGroups.group2}}>
+                            <BsModal/>
+                          </dishListContext.Provider>
+                          }
                           </div>
                           <Droppable
                             id={'group2'}
@@ -342,6 +333,7 @@ function MenuMaker() {
 
   )
 
+ 
 }
 
 export default MenuMaker;

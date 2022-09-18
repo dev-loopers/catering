@@ -19,7 +19,7 @@ function BsModal() {
         </Modal.Header>
         <Modal.Body>
             <QuatationForm/>
-      
+
         </Modal.Body>
   
       </Modal>

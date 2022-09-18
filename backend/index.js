@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const db_conn = require('./config/database');
 const path = require('path');
 const {errorHandler} = require('./middleware/errorMiddleware');
+const cookieParser = require('cookie-parser');
 var cors = require('cors')
 
 // routes 
@@ -22,8 +23,9 @@ db_conn();
 
 //middlewares 
 app.use(errorHandler);
-app.use(cors());
+app.use(cors({credentials:true,origin:"http://localhost:3000/"}));
 app.use(express.json());
+app.use(cookieParser());
 //routes config 
 app.use('/api',dishRoutes);
 app.use('/api/auth',authRoutes);

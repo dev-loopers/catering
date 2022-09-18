@@ -2,7 +2,6 @@ import { Container, Col, Row } from "react-bootstrap";
 import HeaderSec from "./includes_comp/HeaderSec";
 import ThaliSample from "./component/ThaliSample";
 import dishListContext from "./dishContext";
-
 import react, { useContext } from "react";
 function Ourmenu() {
   let dish = useContext(dishListContext);

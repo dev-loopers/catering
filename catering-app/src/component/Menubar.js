@@ -1,6 +1,6 @@
 import { Container ,Navbar ,Nav ,NavDropdown} from "react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChampagneGlasses,faHollyBerry } from '@fortawesome/free-solid-svg-icons';
+import { faChampagneGlasses,faHollyBerry,faUserShield } from '@fortawesome/free-solid-svg-icons';
 import { Link } from "react-router-dom";
 function Menubar(){
     return(
@@ -26,6 +26,11 @@ function Menubar(){
                 <Link to="/decor" className="nav-link">
                     <FontAwesomeIcon icon={faHollyBerry} />decor
                 </Link>
+                </Nav>
+                <Nav>
+                    <Link to="/login" className="nav-link">
+                    <FontAwesomeIcon icon={faUserShield} />Login
+                    </Link>
                 </Nav>
             </Navbar.Collapse>
             </Container>

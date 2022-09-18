@@ -31,24 +31,32 @@ const authController = asyncHandler(async (req,resp)=>{
     const {email,password} = req.body;
     const user = await UserModel.findOne({email});
     if (user && (await user.checkpassword(password))) {
-        resp.send({"id":generateToken(user._id)});
+        
+        resp.cookie(String(user._id),generateToken(user._id),{
+            path:'/',
+            expires : new Date(Date.now() + 1000 * 30 ),
+            httpOnly:true,
+            sameSite:'lax'
+        });
+        resp.status(200).json({message:"loggin done",existingUser:user,token:generateToken(user._id)});
     } else {
-        resp.send("login failed");
+        resp.status(404).json({message:"Invalid Crediantial"});
     }
    
 });
 
 // get user profile after authentication
 const getProfile = asyncHandler(async (req,resp)=>{
-    const user = await UserModel.findById(req.user._id);
+    const user = await UserModel.findById(req.user._id,"-password");
     if(user){
         resp.json({
-            _id : user._id,
-            name: user.name,
-            contact:user.contact,
-            email:user.email,
-            username:user.username,
-            role:user.role
+            user
+            // _id : user._id,
+            // name: user.name,
+            // contact:user.contact,
+            // email:user.email,
+            // username:user.username,
+            // role:user.role
 
         }); 
 
@@ -59,4 +67,8 @@ const getProfile = asyncHandler(async (req,resp)=>{
 
 });
 
-module.exports = {authController,getProfile,registerUser};
+const refreshTocken = asyncHandler( async (req,resp)=>{
+
+});
+
+module.exports = {authController,getProfile,registerUser,refreshTocken};

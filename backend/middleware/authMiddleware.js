@@ -5,21 +5,21 @@ const UserModel = require('../models/UserModel');
 
 const protectRoute =asyncHandler( async (req,resp,next)=>{
     let token;
-    if (req.headers.authorization) 
+    const cookie = req.headers.cookie;
+
         try {
-            token = req.headers.authorization;
+           
+            token = cookie.split("=")[1];
             const decode = jwt.verify(token,process.env.JWT_KEY);
            
             req.user = await UserModel.findById(decode.id).select('-password');
             next();
         } catch (error) {
-            resp.status(404);
-           throw new Error({"error":"invalid token"});
+            resp.status(404).json({message:"invalid token"});
             
         }
         if(!token){
-            resp.status(404);
-            throw new Error("Unauthorized access");
+            resp.status(404).json({message:"Unauthorized access"});
         }
         
    
