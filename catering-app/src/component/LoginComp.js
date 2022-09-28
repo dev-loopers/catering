@@ -5,8 +5,15 @@ import Card from 'react-bootstrap/Card';
 import { useState } from 'react';
 import { Link ,useNavigate} from "react-router-dom";
 import axios from 'axios';
-function LoginComp() {
+import dishListContext from "../dishContext";
+    function LoginComp() {
+    const [isLoggedIn,setIsLoggedIn] = useState(false);
+    console.log("logins stauts : " + isLoggedIn);
     const history = useNavigate();
+
+    if (isLoggedIn){
+        history("/account");
+    }
     const [values,setValues] = useState({
         email:'',
         password:''
@@ -21,8 +28,21 @@ function LoginComp() {
             email:values.email,
             password:values.password
         });
+
         const data = await req.data;
+        if(data.is_done && isLoggedIn === false){
+            setIsLoggedIn(true);
+            console.log("logins stauts : " + isLoggedIn);
+            console.log("if is working ");
+
+
+        }else{
+            console.log("else is working ");
+
+            setIsLoggedIn(false);
+        }
         return data;
+
     }
   
     const handleSubmit =(e) =>{

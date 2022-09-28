@@ -1,16 +1,23 @@
 import { Container, Col, Row } from "react-bootstrap";
 import HeaderSec from "./includes_comp/HeaderSec";
 import ThaliSample from "./component/ThaliSample";
-import dishListContext from "./dishContext";
-import react, { useContext } from "react";
+import react, { useEffect,useState } from "react";
+import axios from "axios";
 function Ourmenu() {
-  let dish = useContext(dishListContext);
-  const dishList = dish.dish;
+  let[dish, setDish] = useState([]);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const { data } = await axios.get("/api/products");
+      setDish(data);
+    };
+
+    fetchProducts();
+  }, [dish]);
   return (
     <Container fluid>
       <HeaderSec title="Choose from our menu" />
       <Row>
-        {dishList.map((product) => (
+        {dish.map((product) => (
           <Col xs={12} md={6} lg={4} className="mt-5" key={product._id}>
             <ThaliSample
           

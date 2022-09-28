@@ -21,9 +21,6 @@ const protectRoute =asyncHandler( async (req,resp,next)=>{
         if(!token){
             resp.status(404).json({message:"Unauthorized access"});
         }
-        
-   
-
 });
 
 
